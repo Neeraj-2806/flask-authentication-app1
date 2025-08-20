@@ -29,3 +29,19 @@ A fully functional user authentication app built with **Flask** and **MySQL**, p
 
 ## 🏗️ Folder Structure
 
+flask-devops-pipeline/
+├── app/
+│   ├── __init__.py
+│   ├── models.py
+│   └── routes.py
+├── templates/
+│   ├── index.html
+│   ├── register.html
+│   └── login.html
+├── .env
+├── .gitignore
+├── .dockerignore
+├── requirements.txt
+├── Dockerfile
+├── run.py
+└── README.md

@@ -1,4 +1,4 @@
-# Base image
+# Base image download
 FROM python:3.12-slim
 
 # Install required system dependencies

@@ -21,6 +21,9 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy project files
 COPY . .
 
+COPY scripts/init_db.py /app/init_db.py
+
+
 # Expose Flask app port
 EXPOSE 5000
 

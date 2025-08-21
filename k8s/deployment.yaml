@@ -33,6 +33,11 @@ spec:
           value: flask-db.csp6soueyf3p.us-east-1.rds.amazonaws.com
         - name: MYSQL_DB
           value: flaskdb
+        - name: SECRET_KEY
+          valueFrom:
+              secretKeyRef:
+                name: flask-secret
+                key: SECRET_KEY
         livenessProbe:
           httpGet:
             path: /

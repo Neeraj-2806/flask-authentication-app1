@@ -25,6 +25,10 @@ jobs:
       - name: Update kubeconfig for EKS
         run: aws eks update-kubeconfig --region us-east-1 --name blackforge-eks-cluster
 
+      - name: Test Kubernetes Access
+        run: kubectl get nodes
+
+
       - name: Set up Python
         uses: actions/setup-python@v4
         with:

@@ -13,9 +13,11 @@ spec:
       labels:
         app: flask-app
     spec:
+      imagePullSecrets:
+        - name:  nexus-docker-secret
       containers:
       - name: flask-app
-        image: rg7121/flask-auth-devops:latest
+        image: a8bdb61a08f3249508e82b2f865e4d88-1033672356.us-east-1.elb.amazonaws.com:5000/flask-auth:latest
         ports:
         - containerPort: 5000
         env:

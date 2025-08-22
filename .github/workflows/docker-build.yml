@@ -60,6 +60,14 @@ jobs:
           vuln-type: os,library
           severity: CRITICAL
           
+      - name: SonarQube Scan
+        uses: sonarsource/sonarqube-scan-action@v2
+        with:
+          projectBaseDir: .
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+
       - name: Deploy Init Job
         run: |
           kubectl apply -f k8s/init-job.yaml -n flask

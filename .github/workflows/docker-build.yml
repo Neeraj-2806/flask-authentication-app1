@@ -6,11 +6,9 @@ on:
       - main
   workflow_dispatch:
 
-env:
-  IMAGE_NAME: flask-auth
-  REGISTRY_URL: a8bdb61a08f3249508e82b2f865e4d88-1033672356.us-east-1.elb.amazonaws.com:5000
 
 
+    
 jobs:
   build-and-deploy:
     name: Build Docker image and Deploy to EKS
@@ -48,26 +46,17 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Trust Nexus as Insecure Registry
-        run: |
-            echo '{ "insecure-registries":["a8bdb61a08f3249508e82b2f865e4d88-1033672356.us-east-1.elb.amazonaws.com:5000"] }' | sudo tee /etc/docker/daemon.json
-            sudo systemctl restart docker
-
-      
-      - name: Log in to Nexus Docker Registry
-        run: echo "${{ secrets.NEXUS_PASSWORD }}" | docker login ${{ env.REGISTRY_URL }} -u ${{ secrets.NEXUS_USERNAME }} --password-stdin
-
       - name: Build and Push Docker Image
         uses: docker/build-push-action@v5
         with:
           context: .
           push: true
-          tags: ${{ env.REGISTRY_URL }}/${{ env.IMAGE_NAME }}:latest
+          tags: rg7121/flask-auth-devops:latest
 
       - name: Trivy Scan - Docker Image
         uses: aquasecurity/trivy-action@0.13.0
         with:
-          image-ref: flask-auth:latest
+          image-ref: rg7121/flask-auth-devops:latest
           format: table
           exit-code: 1
           ignore-unfixed: true
@@ -90,16 +79,6 @@ jobs:
           kubectl apply -f k8s/init-job.yaml -n flask
           kubectl wait --for=condition=complete job/db-init-job -n flask --timeout=60s || true
           kubectl delete job db-init-job -n flask || true
-     
-      - name: Create Nexus Pull Secret
-        run: |
-          kubectl create secret docker-registry nexus-docker-secret \
-             --docker-server=${{ env.REGISTRY_URL }} \
-             --docker-username=${{ secrets.NEXUS_USERNAME }} \
-             --docker-password=${{ secrets.NEXUS_PASSWORD }} \
-             --docker-email=dummy@example.com \
-             --namespace=flask --dry-run=client -o yaml | kubectl apply -f -
-
 
       - name: Deploy to EKS
         run: |

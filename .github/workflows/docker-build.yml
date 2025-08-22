@@ -61,7 +61,7 @@ jobs:
           exit-code: 1
           ignore-unfixed: true
           vuln-type: os,library
-          severity: CRITICAL`
+          severity: CRITICAL
 
       - name: SonarQube Scan
         uses: sonarsource/sonarqube-scan-action@v2

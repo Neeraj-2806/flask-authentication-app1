@@ -50,6 +50,16 @@ jobs:
           push: true
           tags: rg7121/flask-auth-devops:latest
 
+      - name: Trivy Scan - Docker Image
+        uses: aquasecurity/trivy-action@0.13.0
+        with:
+          image-ref: rg7121/flask-auth-devops:latest
+          format: table
+          exit-code: 1
+          ignore-unfixed: true
+          vuln-type: os,library
+          severity: CRITICAL
+          
       - name: Deploy Init Job
         run: |
           kubectl apply -f k8s/init-job.yaml -n flask

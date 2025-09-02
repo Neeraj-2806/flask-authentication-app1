@@ -25,7 +25,6 @@ A fully functional user authentication app built with **Flask** and **MySQL**, p
 | IaC               | Terraform (AWS: EKS, RDS)|
 | Monitoring        | Prometheus + Grafana     |
 | Security          | SonarQube + Trivy        |
-| Artifact Registry | Nexus                    |
 
 ## 🏗️ Folder Structure
 ```

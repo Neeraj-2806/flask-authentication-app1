@@ -10,6 +10,11 @@ services:
       MYSQL_DATABASE: flaskdb
       MYSQL_USER: admin
       MYSQL_PASSWORD: StrongPass123!
+    healthcheck: 
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 5s          # typo fixed: was 'inverval'
+      timeout: 5s
+      retries: 5
     ports:
       - "3306:3306"
     volumes:
@@ -24,7 +29,8 @@ services:
     ports:
       - "5000:5000"
     depends_on:
-      - db
+      db:
+        condition: service_healthy  # must be under the service name
 
 volumes:
   db_data:

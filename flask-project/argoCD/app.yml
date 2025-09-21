@@ -8,7 +8,7 @@ spec:
   source: 
     repoURL: https://github.com/Neeraj-2806/flask-authentication-app1.git
     targetRevision: main 
-    path: flask-project/k8s 
+    path: k8s 
   destination: 
     server: https://kubernetes.default.svc
     namespace: flask 

@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application 
+metadata: 
+  name: flask-authenticate-app 
+  namespace: argocd 
+spec: 
+  project: default 
+  source: 
+    repoURL: https://github.com/Neeraj-2806/flask-authentication-app1.git
+    targetRevision: main 
+    path: k8s 
+  destination: 
+    server: https://kubernetes.default.svc
+    namespace: flask 
+  syncPolicy: 
+   automated: 
+    prune: true 
+    selfHeal: true 
+  syncOptions: 
+   - CreateNamespace=true  

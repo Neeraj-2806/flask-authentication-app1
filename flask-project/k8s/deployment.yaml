@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flask-deployment
+  namespace: flask
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: flask-app
+  template:
+    metadata:
+      labels:
+        app: flask-app
+    spec:
+      containers:
+        - name: flask-ctr
+          image: neeraj2806/flask-authenticate:latest
+          ports:
+            - containerPort: 5000
+          env:
+            - name: MYSQL_USER
+              valueFrom:
+                secretKeyRef:
+                  name: db-credentials
+                  key: MYSQL_USER
+            - name: MYSQL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: db-credentials
+                  key: MYSQL_PASSWORD
+            - name: MYSQL_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: db-credentials
+                  key: MYSQL_HOST
+            - name: MYSQL_DB
+              value: flaskdb
+            - name: SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: db-credentials
+                  key: SECRET_KEY
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 5000
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 5000
+            initialDelaySeconds: 5
+            periodSeconds: 10

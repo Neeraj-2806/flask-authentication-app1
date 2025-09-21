@@ -1,0 +1,9 @@
+k8s/details.yml
+k8s/secret.yml
+k8s/secret.yml
+k8s/kubeseal
+k8s/details.yml
+terraform/terraform.tfstate
+terraform/terraform.tfstate.backup
+terraform/.terraform
+terraform/.terraform.lock.hcl

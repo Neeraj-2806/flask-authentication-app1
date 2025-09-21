@@ -3,6 +3,7 @@ k8s/secret.yml
 k8s/secret.yml
 k8s/kubeseal
 k8s/details.yml
+k8s/pub-cert.pem
 terraform/terraform.tfstate
 terraform/terraform.tfstate.backup
 terraform/.terraform

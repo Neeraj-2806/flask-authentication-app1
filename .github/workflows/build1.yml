@@ -67,8 +67,8 @@ jobs:
            SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
          with:
           args: >
-           -Dsonar.projectKey=Hotstar
-           -Dsonar.projectName=Hotstar
+           -Dsonar.projectKey=Flask-Auth
+           -Dsonar.projectName=Flask-Auth
            -Dsonar.sources=.
        - name: Deploy to EKS 
          run: | 

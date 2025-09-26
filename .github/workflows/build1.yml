@@ -60,6 +60,16 @@ jobs:
           exit-code: 1 
           ignore-unfixed: true
           severity: 'CRITICAL,HIGH' 
+       - name: sonarqube scan
+         uses: SonarSource/sonarqube-scan-action@v3
+         env:
+           SONAR_TOKEN: ${{ secrets.SONARQUBE_TOKEN }}
+           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+         with:
+          args: >
+           -Dsonar.projectKey=Hotstar
+           -Dsonar.projectName=Hotstar
+           -Dsonar.sources=.
        - name: Deploy to EKS 
          run: | 
            kubectl create namespace flask --dry-run=client -o yaml | kubectl apply -f -

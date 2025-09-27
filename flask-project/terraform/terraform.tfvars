@@ -10,3 +10,9 @@ db_password = "admin1234"
 db_name = "flaskdb"
 vpc_id = "vpc-018492c1597547a0b"
 public_subnet_ids = ["subnet-0d65cfcf666747283", "subnet-0aa04542b5cef9303"]
+ami_id = "ami-08982f1c5bf93d976"
+instance_type = {
+    ansible-master = "t3.micro"
+    ansible-slave = "t3.micro"
+}
+port_number = [22,80,443]

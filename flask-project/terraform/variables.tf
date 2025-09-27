@@ -18,3 +18,11 @@ variable "vpc_id" {}
 variable "public_subnet_ids"{
     type = list(string)
 }
+variable "ami_id" {}
+variable "instance_type" {
+    type = map(string) 
+}
+variable "port_number"{
+    type = list(number)
+}
+ 
